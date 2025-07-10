@@ -10,7 +10,7 @@ import {
 import Root from './Layout/Root.jsx';
 import Home from './Components/Home/Home.jsx';
 import Login from './Components/Login/Login.jsx';
-import Register from './Components/Register.jsx';
+import Register from './Components/Register/Register.jsx';
 
 const router = createBrowserRouter([
   {
