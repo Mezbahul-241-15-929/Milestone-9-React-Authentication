@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
 import { auth } from '../../firebase/firebase.init';
 import { FaEyeSlash, FaEye } from "react-icons/fa6";
+import { Link } from 'react-router';
 
 
 
@@ -97,8 +98,10 @@ const Register = () => {
                     Accept Terms and Condition
                 </label>
                 <br />
-                <button className='btn btn-primary'>Submit</button>
+                <button className='btn btn-primary'>Sign Up</button>
             </form>
+
+            <p>Already have and Acount? Please <Link className='text-blue-400 underline' to="/login">Login</Link></p>
         </div>
     );
 };
