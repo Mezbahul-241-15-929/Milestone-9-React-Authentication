@@ -11,7 +11,7 @@ const Register = () => {
         const password = e.target.password.value;
         console.log(email, password);
 
-        // create user
+        // create users
         createUserWithEmailAndPassword(auth,email,password)
         .then(result=>{
             console.log(result);
