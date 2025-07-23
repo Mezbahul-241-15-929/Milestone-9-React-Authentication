@@ -1,24 +1,34 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import React from 'react';
+import React, { useState } from 'react';
 import { auth } from '../../firebase/firebase.init';
+import { FaEyeSlash, FaEye } from "react-icons/fa6";
+
 
 
 const Register = () => {
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleRegister = (e) => {
         e.preventDefault();
         const email = e.target.name.value;
         const password = e.target.password.value;
+        const terms=e.target.terms.checked;
         console.log(email, password);
 
+        if(!terms){
+            console.log("Terms & Condition not Accepted");
+            return;
+        }
+
         // create users
-        createUserWithEmailAndPassword(auth,email,password)
-        .then(result=>{
-            console.log(result);
-        })
-        .catch(error=>{
-            console.log(error)
-        })
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(result => {
+                console.log(result);
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     return (
@@ -59,20 +69,33 @@ const Register = () => {
                             <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
                         </g>
                     </svg>
-                    <input
-                        type="password"
-                        name='password'
-                        required
-                        placeholder="Password"
-                        minLength="8"
-                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                        title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
-                    />
+                    <div className='relative'>
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            name='password'
+                            required
+                            placeholder="Password"
+                            minLength="8"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
+                        />
+                        <button onClick={() => { setShowPassword(!showPassword) }} className='btn btn-xs absolute left-62'>
+                            {
+                                showPassword ? <FaEye /> : <FaEyeSlash />
+
+                            }
+                        </button>
+                    </div>
                 </label>
                 <p className="validator-hint hidden">
                     Must be more than 8 characters, including
                     <br />At least one number <br />At least one lowercase letter <br />At least one uppercase letter
                 </p>
+                <br />
+                <label className="label">
+                    <input type="checkbox"  className="checkbox" name='terms' />
+                    Accept Terms and Condition
+                </label>
                 <br />
                 <button className='btn btn-primary'>Submit</button>
             </form>
