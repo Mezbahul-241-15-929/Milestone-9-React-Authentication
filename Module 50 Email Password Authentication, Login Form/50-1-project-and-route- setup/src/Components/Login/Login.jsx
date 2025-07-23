@@ -1,5 +1,5 @@
-import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
-import React, { useState } from 'react';
+import { GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import React, { useRef, useState } from 'react';
 import { auth } from "../../firebase/firebase.init";
 import { Link } from "react-router";
 
@@ -36,36 +36,66 @@ const Login = () => {
 
 
 
-    {/* Login with Email & password: */}
+    {/* Login with Email & password: */ }
 
-    const [errorMessage,setErrorMessage]=useState('');
-    const [success,setSuccess]=useState(false);
-
-
+    const [errorMessage, setErrorMessage] = useState('');
+    const [success, setSuccess] = useState(false);
 
 
-    const handleLogin =e =>{
+
+
+    const handleLogin = e => {
         e.preventDefault();
 
-        const email= e.target.email.value;
-        const password= e.target.password.value;
+        const email = e.target.email.value;
+        const password = e.target.password.value;
 
-        console.log(email,password);
+        console.log(email, password);
 
         //reset 
         setErrorMessage('');
         setSuccess(false);
 
         //login user
-        signInWithEmailAndPassword(auth,email,password)
-        .then(result=>{
-            console.log(result.user);
-            setSuccess(true);
+        signInWithEmailAndPassword(auth, email, password)
+            .then(result => {
+                console.log(result.user);
+
+                if (!result.user.emailVerified) {
+                    alert("Please verified your email address")
+                }
+                else {
+                    setSuccess(true);
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                setErrorMessage(error.message)
+            })
+
+
+    }
+
+    //forget password:
+    const emailRef=useRef();
+
+
+
+    const handleForgetPassword=()=>{
+        console.log(emailRef.current.value);
+        const email2=emailRef.current.value;
+
+        setErrorMessage('');
+
+        //sent password reset email
+        sendPasswordResetEmail(auth,email2)
+        .then(()=>{
+            alert("A password reset email is sent")
         })
-        .catch(error =>{
-            console.log(error);
-            setErrorMessage(error.message)
+        .catch(error=>{
+            setErrorMessage(error.message);
         })
+
     }
 
     return (
@@ -99,10 +129,10 @@ const Login = () => {
 
                     <form onSubmit={handleLogin} className="fieldset">
                         <label className="label">Email</label>
-                        <input type="email" name="email" className="input" placeholder="Email" />
+                        <input ref={emailRef} type="email" name="email" className="input" placeholder="Email" />
                         <label className="label">Password</label>
                         <input type="password" name="password" className="input" placeholder="Password" />
-                        <div><a className="link link-hover">Forgot password?</a></div>
+                        <div onClick={handleForgetPassword}><a className="link link-hover">Forgot password?</a></div>
                         <button className="btn btn-neutral mt-4">Login</button>
                     </form>
                     <p>New to this website? Please <Link to='/register' className="text-blue-500 underline">Sign Up</Link></p>
