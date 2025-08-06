@@ -1,11 +1,7 @@
-import { useContext } from 'react';
-import { NavLink } from 'react-router'; // Use 'react-router-dom' not 'react-router'
-import { AuthContext } from '../contexts/AuthContext';
+import React from 'react';
+import { NavLink } from 'react-router';
 
 const Navbar = () => {
-    const userInfo = useContext(AuthContext);
-    console.log("sadf",userInfo); // Will now correctly log 5
-
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/login'>Login</NavLink></li>
