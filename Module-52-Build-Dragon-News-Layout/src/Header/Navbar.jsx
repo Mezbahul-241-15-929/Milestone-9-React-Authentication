@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router';
+// import user form 
 
 const Navbar = () => {
     return (
-        <div className='flex justify-between items-center'>
-            <div></div>
+        <div className='flex justify-between items-center w-11/12 mx-auto my-3'>
+            <div className='font-bold'>BD News</div>
             <div className='nav flex gap-5' >
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/about">About</NavLink>
