@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router';
-// import user form 
+import usericon from "./../assets/user.png";
+
 
 const Navbar = () => {
     return (
@@ -12,7 +13,7 @@ const Navbar = () => {
                 <NavLink to="/career">Career</NavLink>
             </div>
             <div className='login-btn flex gap-5'>
-                <img src="" alt="" />
+                <img src={usericon} alt="" />
                 <button className='btn btn-primary px-10'>Login</button>
             </div>
         </div>
