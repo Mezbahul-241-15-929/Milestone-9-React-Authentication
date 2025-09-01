@@ -20,7 +20,9 @@ const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       {path: "/category/:id",
-        element: <CategoryNews></CategoryNews>
+        element: <CategoryNews></CategoryNews>,
+        loader: ()=> fetch("/public/news.json")
+        
       }
       // { path: "/login", Component: Login },
       // { path: "/register", Component: Register },
