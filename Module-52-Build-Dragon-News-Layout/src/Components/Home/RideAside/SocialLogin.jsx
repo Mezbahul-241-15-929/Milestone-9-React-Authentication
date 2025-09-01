@@ -2,8 +2,8 @@ import React from 'react';
 
 const SocialLogin = () => {
     return (
-        <div className=''>
-            <h2 className='font-bold mb-5'>Login With</h2>
+        <div className='shadow-md p-3 rounded-md'>
+            <h2 className='font-bold mb-5 text-center '>Login With</h2>
             <div className='space-y-3 flex flex-col'>
                 {/* Google */}
                 <button className="btn bg-white text-black border-[#e5e5e5]">

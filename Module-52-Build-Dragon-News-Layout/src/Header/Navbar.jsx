@@ -5,8 +5,8 @@ import usericon from "./../assets/user.png";
 
 const Navbar = () => {
     return (
-        <div className='flex justify-between items-center w-11/12 mx-auto my-3'>
-            <div className='font-bold'>BD News</div>
+        <div className='flex justify-between items-center w-11/12 mx-auto mb-12 shadow-2xs p-3 rounded-md'>
+            <div className='font-bold'>The Dragon News</div>
             <div className='nav flex gap-5' >
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/about">About</NavLink>

@@ -6,8 +6,8 @@ const categoryPromise = fetch("/public/categories.json").then((res)=>res.json())
 const Categories = () => {
     const categories =use(categoryPromise);
     return (
-        <div>
-            <h1 className='font-bold'>All Categories {categories.length}</h1>
+        <div className=''>
+            <h1 className='shadow-md p-3 rounded-md font-bold text-center'>All Categories ({categories.length})</h1>
 
             <div className='grid grid-cols-1 mt-5'>
                 {
