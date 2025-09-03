@@ -13,6 +13,7 @@ import Login from './Components/AuthLayout/Login.jsx';
 import Register from './Components/AuthLayout/Register.jsx';
 import CategoryNews from './Pages/CategoryNews.jsx';
 import AuthLayout from './Components/AuthLayout/AuthLayout.jsx';
+import AuthProvider from './provider/AuthProvider.jsx';
 
 const router = createBrowserRouter([
   {
@@ -20,10 +21,11 @@ const router = createBrowserRouter([
     Component: Root,
     children: [
       { index: true, Component: Home },
-      {path: "/category/:id",
+      {
+        path: "/category/:id",
         element: <CategoryNews></CategoryNews>,
-        loader: ()=> fetch("/public/news.json")
-        
+        loader: () => fetch("/public/news.json")
+
       },
       // { path: "/login", Component: Login },
       // { path: "/register", Component: Register },
@@ -31,24 +33,27 @@ const router = createBrowserRouter([
     ],
   },
   {
-        path: "/auth",
-        element: <AuthLayout></AuthLayout>,
-        children:[
-          {
-            path: "/auth/login",
-            element: <Login></Login>,
-          },
-          {
-            path: "/auth/register",
-            element: <Register></Register>,
-          },
-        ]
+    path: "/auth",
+    element: <AuthLayout></AuthLayout>,
+    children: [
+      {
+        path: "/auth/login",
+        element: <Login></Login>,
       },
+      {
+        path: "/auth/register",
+        element: <Register></Register>,
+      },
+    ]
+  },
 
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+
   </StrictMode>,
 )
