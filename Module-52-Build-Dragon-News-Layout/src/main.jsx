@@ -9,9 +9,10 @@ import {
 } from "react-router";
 import Root from './Layout/Root.jsx';
 import Home from './Components/Home/Home.jsx';
-import Login from './Components/Login/Login.jsx';
-import Register from './Components/Register/Register.jsx';
+import Login from './Components/AuthLayout/Login.jsx';
+import Register from './Components/AuthLayout/Register.jsx';
 import CategoryNews from './Pages/CategoryNews.jsx';
+import AuthLayout from './Components/AuthLayout/AuthLayout.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,12 +24,27 @@ const router = createBrowserRouter([
         element: <CategoryNews></CategoryNews>,
         loader: ()=> fetch("/public/news.json")
         
-      }
+      },
       // { path: "/login", Component: Login },
       // { path: "/register", Component: Register },
       // { path: "/*", element: <h2>Error Page</h2> },
     ],
   },
+  {
+        path: "/auth",
+        element: <AuthLayout></AuthLayout>,
+        children:[
+          {
+            path: "/auth/login",
+            element: <Login></Login>,
+          },
+          {
+            path: "/auth/register",
+            element: <Register></Register>,
+          },
+        ]
+      },
+
 ]);
 
 createRoot(document.getElementById('root')).render(
